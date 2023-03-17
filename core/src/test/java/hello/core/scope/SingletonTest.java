@@ -12,8 +12,8 @@ public class SingletonTest {
 
     @Test
     void singletonBeanFind(){
-        // 클래스의 이름 자체를 설정 정보로 넣음, 클래스 자체가 component scan이
-        // 되어서 자동으로 등록됨
+        // 클래스의 이름 자체를 설정 정보로 넣음
+        // 클래스 자체가 component scan의 대상이 되어서 자동으로 등록됨
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SingletonBean.class);
 
         SingletonBean singletonBean1 = ac.getBean(SingletonBean.class);
