@@ -15,14 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService LogDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
-    
+    //private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request){ // 자바에서 제공하는 표준 서블릿 규약 그거를 위한 Http Request 정보를 받을 수 있음
         String requestURL = request.getRequestURL().toString();
 
-        MyLogger myLogger = myLoggerProvider.getObject();
+        //MyLogger myLogger = myLoggerProvider.getObject();
+
+        System.out.println("myLogger = " + myLogger.getClass());
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
