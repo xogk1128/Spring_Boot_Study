@@ -25,7 +25,7 @@ public class ResponseHeaderServlet extends HttpServlet {
         // [Header 편의 메소드]
         //content(response);
         //cookie(response);
-        redirect(response);
+        //redirect(response);
 
         // [message Body]
         PrintWriter writer = response.getWriter();
