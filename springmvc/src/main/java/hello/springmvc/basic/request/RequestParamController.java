@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -83,6 +84,14 @@ public class RequestParamController {
             @RequestParam(required = false, defaultValue = "-1") int age){
 
         log.info("username={}, age={}",username, age);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-map")
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap){
+
+        log.info("username={}, age={}",paramMap.get("username"), paramMap.get("age"));
         return "ok";
     }
 }
