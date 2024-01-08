@@ -16,15 +16,17 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
+/**
+ *  NamedParameterJdbcTemplate
+ */
 @Slf4j
-public class jdbcTemplateItemRepositoryV1 implements ItemRepository {
+public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
 
     private final JdbcTemplate template;
 
-    public jdbcTemplateItemRepositoryV1(DataSource dataSource) {
+    public JdbcTemplateItemRepositoryV2(DataSource dataSource) {
         this.template = new JdbcTemplate(dataSource);
     }
 
@@ -112,8 +114,8 @@ public class jdbcTemplateItemRepositoryV1 implements ItemRepository {
         }
 
         log.info("sql={}", sql);
-        
+
         // query는 리스트 형태를 가져올 경우
-        return template.query(sql, itemRowMapper());
+        return template.query(sql, itemRowMapper(), param.toArray());
     }
 }
