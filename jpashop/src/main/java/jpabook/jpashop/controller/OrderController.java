@@ -44,7 +44,6 @@ public class OrderController {
 
         return "redirect:/orders";
     }
-
     @GetMapping("/orders")
     public String orderList(@ModelAttribute("orderSearch")OrderSearch orderSearch, Model model){
         List<Order> orders = orderService.findOrders(orderSearch);
