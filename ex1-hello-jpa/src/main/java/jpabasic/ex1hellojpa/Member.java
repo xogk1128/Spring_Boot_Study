@@ -2,7 +2,9 @@ package jpabasic.ex1hellojpa;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Member")
@@ -19,6 +21,8 @@ public class Member {
 
     private String zipcode;
 
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
     public String getName() {
         return name;
     }
