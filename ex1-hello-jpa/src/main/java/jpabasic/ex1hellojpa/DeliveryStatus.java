@@ -1,4 +1,5 @@
 package jpabasic.ex1hellojpa;
 
-public class DeliveryStatus {
+public enum DeliveryStatus {
+    READY, COMP
 }

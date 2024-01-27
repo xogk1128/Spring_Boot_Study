@@ -15,11 +15,11 @@ public class Ex1HelloJpaApplication {
 		tx.begin();
 
 		try {
-			Member member = new Member();
-			member.setId(1L);
-			member.setName("helloA");
+			Book book = new Book();
+			book.setName("JPA");
+			book.setAuthor("김영한");
 
-			em.persist(member);
+			em.persist(book);
 
 			tx.commit();
 
