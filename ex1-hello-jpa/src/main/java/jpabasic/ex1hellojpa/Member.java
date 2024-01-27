@@ -12,49 +12,49 @@ import java.util.List;
 public class Member extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "MEMBER_ID")
     private Long id;
-//    @Column(name = "name")
-    private String name;
 
-    private String city;
+    @Column(name = "USERNAME")
+    private String username;
 
-    private String street;
-
-    private String zipcode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
-    public String getName() {
-        return name;
+    public Long getId() {
+        return id;
     }
 
-    public String getCity() {
-        return city;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getStreet() {
-        return street;
+    public String getUsername() {
+        return username;
     }
 
-    public String getZipcode() {
-        return zipcode;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     //    private Integer age;

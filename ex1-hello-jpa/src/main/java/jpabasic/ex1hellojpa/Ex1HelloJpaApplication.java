@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
 @SpringBootApplication
 public class Ex1HelloJpaApplication {
 
@@ -15,11 +17,27 @@ public class Ex1HelloJpaApplication {
 		tx.begin();
 
 		try {
-			Book book = new Book();
-			book.setName("JPA");
-			book.setAuthor("김영한");
+			Team team = new Team();
+			team.setName("teamA");
+			em.persist(team);
 
-			em.persist(book);
+			Member member1 = new Member();
+			member1.setUsername("member1");
+			member1.setTeam(team);
+
+			em.persist(member1);
+
+			em.flush();
+			em.clear();
+
+			List<Member> members = em.createQuery("select m from Member m", Member.class)
+					.getResultList();
+
+//			Member m = em.find(Member.class, member1.getId());
+
+//			System.out.println("m = " + m.getTeam().getClass());
+
+//			m.getTeam().getName();
 
 			tx.commit();
 
