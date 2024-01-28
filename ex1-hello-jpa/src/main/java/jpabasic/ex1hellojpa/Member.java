@@ -29,12 +29,12 @@ public class Member extends BaseEntity{
     @Embedded
     private Address address;
 
-    @ElementCollection
-    @CollectionTable(name = "FAVORITE_FOOD", joinColumns =
-        @JoinColumn(name = "MEMBER_ID")
-    )
-    @Column(name = "FOOD_NAME")
-    private Set<String> favoriteFoods = new HashSet<>();
+//    @ElementCollection
+//    @CollectionTable(name = "FAVORITE_FOOD", joinColumns =
+//        @JoinColumn(name = "MEMBER_ID")
+//    )
+//    @Column(name = "FOOD_NAME")
+//    private Set<String> favoriteFoods = new HashSet<>();
 
 //    @ElementCollection
 //    @CollectionTable(name = "ADDRESS", joinColumns =
@@ -42,9 +42,9 @@ public class Member extends BaseEntity{
 //    )
 //    private List<Address> addressesHistory = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "MEMBER_ID")
-    private List<AddressEntity> addressHistory = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "MEMBER_ID")
+//    private List<AddressEntity> addressHistory = new ArrayList<>();
 
 //    @Embedded
 //    @AttributeOverrides({
@@ -88,6 +88,23 @@ public class Member extends BaseEntity{
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
+    public Period getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 
     //    private Integer age;
 
