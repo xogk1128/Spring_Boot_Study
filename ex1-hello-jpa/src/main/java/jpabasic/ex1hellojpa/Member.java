@@ -3,9 +3,7 @@ package jpabasic.ex1hellojpa;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "Member")
@@ -31,16 +29,33 @@ public class Member extends BaseEntity{
     @Embedded
     private Address address;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name="city",
-                    column = @Column(name = "WORK_CITY")),
-            @AttributeOverride(name="street",
-                    column = @Column(name = "WORK_STREET")),
-            @AttributeOverride(name="zipcode",
-                    column = @Column(name = "WORK_ZIPCODE"))
-    })
-    private Address homeAddress;
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns =
+        @JoinColumn(name = "MEMBER_ID")
+    )
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+//    @ElementCollection
+//    @CollectionTable(name = "ADDRESS", joinColumns =
+//        @JoinColumn(name = "MEMBER_ID")
+//    )
+//    private List<Address> addressesHistory = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
+
+//    @Embedded
+//    @AttributeOverrides({
+//            @AttributeOverride(name="city",
+//                    column = @Column(name = "WORK_CITY")),
+//            @AttributeOverride(name="street",
+//                    column = @Column(name = "WORK_STREET")),
+//            @AttributeOverride(name="zipcode",
+//                    column = @Column(name = "WORK_ZIPCODE"))
+//    })
+//    private Address homeAddress;
 
     public Long getId() {
         return id;
