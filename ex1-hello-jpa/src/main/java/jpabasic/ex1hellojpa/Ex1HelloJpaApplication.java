@@ -1,6 +1,8 @@
 package jpabasic.ex1hellojpa;
 
 import jakarta.persistence.*;
+import jpabasic.ex1hellojpa.jpql.Member1;
+import jpabasic.ex1hellojpa.jpql.MemberDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,11 +19,19 @@ public class Ex1HelloJpaApplication {
 		tx.begin();
 
 		try {
-			Address address1 = new Address("city", "street", "10000");
-			Address address2 = new Address("city", "street", "10000");
+			Member1 member = new Member1();
+			member.setUsername("member1");
+			member.setAge(10);
+			em.persist(member);
+			
+			em.flush();
+			em.clear();
 
-			System.out.println("address1 == address2: " + (address1 == address2));
-			System.out.println("address1 equals address2: " + (address1.equals(address2)));
+			List<MemberDTO> result = em.createQuery("select new jpql.MemberDTO(m.username, m.age) from Member1 m", MemberDTO.class)
+					.getResultList();
+
+			MemberDTO findMember = result.get(0);
+
 
 			tx.commit();
 
