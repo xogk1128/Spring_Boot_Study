@@ -6,6 +6,7 @@ import jpabasic.ex1hellojpa.jpql.MemberDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Collection;
 import java.util.List;
 
 @SpringBootApplication
@@ -27,10 +28,12 @@ public class Ex1HelloJpaApplication {
 			em.flush();
 			em.clear();
 
-			List<MemberDTO> result = em.createQuery("select new jpql.MemberDTO(m.username, m.age) from Member1 m", MemberDTO.class)
+			String jpql = "select t from Team t";
+			List<Team> result = em.createQuery(jpql, Team.class)
+					.setFirstResult(0)
+					.setMaxResults(2)
 					.getResultList();
 
-			MemberDTO findMember = result.get(0);
 
 
 			tx.commit();
